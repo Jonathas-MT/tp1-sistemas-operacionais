@@ -346,9 +346,9 @@ relatorio/relatorio.pdf
 
 | Nome                | Matrícula |
 | ------------------- | --------- |
-| Nome do estudante 1 | XXXXXXXX  |
-| Nome do estudante 2 | XXXXXXXX  |
-| Nome do estudante 3 | XXXXXXXX  |
+| Jonathas Monteiro da Trindade | 22551921 |
+|  Beatriz Quaresma Athaide | 22552431 |
+| Ruthelene Rodrigues Farias | 22552011 |
 
 ---
 
