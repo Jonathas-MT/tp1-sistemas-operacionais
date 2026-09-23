@@ -7,7 +7,7 @@
  *
  * Guarda apenas o dado (saldo) e as operacoes basicas, SEM nenhuma
  * sincronizacao. A sincronizacao (semaforos) fica nos programas
- * (rw_v1_sem_preferencia.c, rw_v2_preferencia_escritores.c), em volta
+ * (main.c da versao-1-sem-preferencia, main.c da versao-2-preferencia-escritores), em volta
  * das chamadas a este TAD - conforme decidido pela equipe.
  */
 

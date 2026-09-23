@@ -20,26 +20,39 @@
  * ATENCAO (ponto a registrar no relatorio): com essa configuracao,
  * leitores podem sofrer starvation se houver escritores suficientes
  * em sequencia, ja que eles tem prioridade total sobre novos leitores.
+ *
+ * Semaforos NOMEADOS (sem_open/sem_close/sem_unlink) em vez de
+ * anonimos (sem_init/sem_destroy): a familia anonima e deprecated no
+ * macOS (Darwin nao implementa suporte completo); a nomeada funciona
+ * sem warning tanto no macOS quanto no Linux. Mesma solucao aplicada
+ * na v1, para manter as duas versoes consistentes.
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
-#include "conta.h"
-#include "../common/log.h"
+#include "../conta.h"
+#include "../../common/log.h"
 
 #define DELAY_LEITOR    3
 #define DELAY_ESCRITOR  1
 #define SALDO_INICIAL   1000
 
+#define NOME_SEM_MUTEX_LEITORES   "/tp1_rw_v2_mutex_leitores"
+#define NOME_SEM_MUTEX_ESCRITORES "/tp1_rw_v2_mutex_escritores"
+#define NOME_SEM_R                "/tp1_rw_v2_r"
+#define NOME_SEM_W                "/tp1_rw_v2_w"
+
 Conta conta_global;
 
-sem_t mutex_leitores;
-sem_t mutex_escritores;
-sem_t r;
-sem_t w;
+sem_t *mutex_leitores;
+sem_t *mutex_escritores;
+sem_t *r;
+sem_t *w;
 
 int readcount = 0;
 int writecount = 0;
@@ -49,20 +62,33 @@ typedef struct {
     int valor; /* usado so pelos escritores: positivo = deposito, negativo = saque */
 } ArgsThread;
 
+/* Abre (criando do zero) um semaforo nomeado com valor inicial dado.
+   Remove qualquer semaforo com esse nome deixado "sujo" por uma
+   execucao anterior encerrada abruptamente, antes de criar o novo. */
+static sem_t *abrir_semaforo(const char *nome, unsigned int valor_inicial) {
+    sem_unlink(nome);
+    sem_t *s = sem_open(nome, O_CREAT | O_EXCL, 0644, valor_inicial);
+    if (s == SEM_FAILED) {
+        perror(nome);
+        exit(1);
+    }
+    return s;
+}
+
 void *escritor_v2(void *arg) {
     ArgsThread *a = (ArgsThread *) arg;
     log_evento(a->id, "ESCRITOR", "CRIADA");
 
-    sem_wait(&mutex_escritores);
+    sem_wait(mutex_escritores);
     writecount++;
     if (writecount == 1) {
         log_evento(a->id, "ESCRITOR", "BLOQUEANDO novos leitores (r)");
-        sem_wait(&r);
+        sem_wait(r);
     }
-    sem_post(&mutex_escritores);
+    sem_post(mutex_escritores);
 
     log_evento(a->id, "ESCRITOR", "BLOQUEADA (aguardando acesso exclusivo)");
-    sem_wait(&w);
+    sem_wait(w);
     log_evento(a->id, "ESCRITOR", "ENTROU na regiao critica");
 
     if (a->valor >= 0) {
@@ -74,15 +100,15 @@ void *escritor_v2(void *arg) {
 
     log_evento_valor(a->id, "ESCRITOR", "SAIU da regiao critica",
                       conta_consultar(&conta_global));
-    sem_post(&w);
+    sem_post(w);
 
-    sem_wait(&mutex_escritores);
+    sem_wait(mutex_escritores);
     writecount--;
     if (writecount == 0) {
-        sem_post(&r);
+        sem_post(r);
         log_evento(a->id, "ESCRITOR", "LIBEROU novos leitores (r)");
     }
-    sem_post(&mutex_escritores);
+    sem_post(mutex_escritores);
 
     log_evento(a->id, "ESCRITOR", "FINALIZADA");
     free(a);
@@ -94,26 +120,26 @@ void *leitor_v2(void *arg) {
     log_evento(a->id, "LEITOR", "CRIADA");
 
     log_evento(a->id, "LEITOR", "BLOQUEADA (aguardando escritor ativo/esperando)");
-    sem_wait(&r);
-    sem_wait(&mutex_leitores);
+    sem_wait(r);
+    sem_wait(mutex_leitores);
     readcount++;
     if (readcount == 1) {
-        sem_wait(&w); /* primeiro leitor bloqueia escritores */
+        sem_wait(w); /* primeiro leitor bloqueia escritores */
     }
-    sem_post(&mutex_leitores);
-    sem_post(&r);
+    sem_post(mutex_leitores);
+    sem_post(r);
 
     log_evento(a->id, "LEITOR", "ENTROU na regiao critica");
     int saldo = conta_consultar(&conta_global);
     sleep(DELAY_LEITOR);
     log_evento_valor(a->id, "LEITOR", "SAIU da regiao critica", saldo);
 
-    sem_wait(&mutex_leitores);
+    sem_wait(mutex_leitores);
     readcount--;
     if (readcount == 0) {
-        sem_post(&w); /* ultimo leitor libera escritores */
+        sem_post(w); /* ultimo leitor libera escritores */
     }
-    sem_post(&mutex_leitores);
+    sem_post(mutex_leitores);
 
     log_evento(a->id, "LEITOR", "FINALIZADA");
     free(a);
@@ -132,10 +158,10 @@ int main(void) {
     int valores_escritores[] = {100, -50, 200};
 
     conta_criar(&conta_global, SALDO_INICIAL);
-    sem_init(&mutex_leitores, 0, 1);
-    sem_init(&mutex_escritores, 0, 1);
-    sem_init(&r, 0, 1);
-    sem_init(&w, 0, 1);
+    mutex_leitores   = abrir_semaforo(NOME_SEM_MUTEX_LEITORES, 1);
+    mutex_escritores = abrir_semaforo(NOME_SEM_MUTEX_ESCRITORES, 1);
+    r                = abrir_semaforo(NOME_SEM_R, 1);
+    w                = abrir_semaforo(NOME_SEM_W, 1);
 
     int total = n_leitores + n_escritores;
     pthread_t threads[total];
@@ -157,10 +183,15 @@ int main(void) {
         pthread_join(threads[i], NULL);
     }
 
-    sem_destroy(&mutex_leitores);
-    sem_destroy(&mutex_escritores);
-    sem_destroy(&r);
-    sem_destroy(&w);
+    sem_close(mutex_leitores);
+    sem_close(mutex_escritores);
+    sem_close(r);
+    sem_close(w);
+    sem_unlink(NOME_SEM_MUTEX_LEITORES);
+    sem_unlink(NOME_SEM_MUTEX_ESCRITORES);
+    sem_unlink(NOME_SEM_R);
+    sem_unlink(NOME_SEM_W);
+
     printf("\nSaldo final: %d\n", conta_consultar(&conta_global));
     return 0;
 }

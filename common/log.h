@@ -6,7 +6,7 @@
  *
  * O Jonathas ficou responsavel pelo TAD Log definitivo (log.h/log.c),
  * com o formato final combinado pela equipe (tempo, tipo, id, evento).
- * Uso esta versao simples aqui so para conseguir compilar e testar a
+ * Versao simples so para conseguir compilar e testar a
  * minha parte (v1 e v2) desde ja. Quando o log oficial estiver pronto,
  * troco este arquivo pelo dele - a assinatura das funcoes deve
  * continuar igual (ou eu ajusto as chamadas no meu codigo).

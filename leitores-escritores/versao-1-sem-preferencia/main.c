@@ -19,16 +19,24 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
-#include "conta.h"
-#include "../common/log.h"
+#include "../conta.h"
+#include "../../common/log.h"
 
 #define DELAY_LEITOR    3
 #define DELAY_ESCRITOR  3
 #define SALDO_INICIAL   1000
 
+/* Semaforo NOMEADO (sem_open/sem_close/sem_unlink) em vez de anonimo
+   (sem_init/sem_destroy). O macOS marca a familia "anonima" como
+   deprecated (nao tem suporte pleno no kernel Darwin); a familia
+   "nomeada" funciona sem warning tanto no macOS quanto no Linux. */
+#define NOME_SEM_ESCRITA "/tp1_rw_v1_escrita"
+
 Conta conta_global;
-sem_t mutex_escrita; /* protege escritores entre si */
+sem_t *mutex_escrita; /* protege escritores entre si */
 
 typedef struct {
     int id;
@@ -40,7 +48,7 @@ void *escritor_v1(void *arg) {
     log_evento(a->id, "ESCRITOR", "CRIADA");
 
     log_evento(a->id, "ESCRITOR", "BLOQUEADA (aguardando outro escritor)");
-    sem_wait(&mutex_escrita);
+    sem_wait(mutex_escrita);
     log_evento(a->id, "ESCRITOR", "ENTROU na regiao critica");
 
     if (a->valor >= 0) {
@@ -53,7 +61,7 @@ void *escritor_v1(void *arg) {
 
     log_evento_valor(a->id, "ESCRITOR", "SAIU da regiao critica",
                       conta_consultar(&conta_global));
-    sem_post(&mutex_escrita);
+    sem_post(mutex_escrita);
 
     log_evento(a->id, "ESCRITOR", "FINALIZADA");
     free(a);
@@ -90,7 +98,17 @@ int main(void) {
     int valores_escritores[] = {100, -50, 200};
 
     conta_criar(&conta_global, SALDO_INICIAL);
-    sem_init(&mutex_escrita, 0, 1);
+
+    /* sem_unlink antes de abrir: remove qualquer semaforo com esse
+       nome deixado "sujo" por uma execucao anterior que tenha sido
+       encerrada abruptamente (ex: Ctrl+C). Se nao existir, o erro
+       e ignorado (retorno -1, sem problema). */
+    sem_unlink(NOME_SEM_ESCRITA);
+    mutex_escrita = sem_open(NOME_SEM_ESCRITA, O_CREAT | O_EXCL, 0644, 1);
+    if (mutex_escrita == SEM_FAILED) {
+        perror("sem_open");
+        exit(1);
+    }
 
     int total = n_leitores + n_escritores;
     pthread_t threads[total];
@@ -112,7 +130,8 @@ int main(void) {
         pthread_join(threads[i], NULL);
     }
 
-    sem_destroy(&mutex_escrita);
+    sem_close(mutex_escrita);
+    sem_unlink(NOME_SEM_ESCRITA);
     printf("\nSaldo final: %d\n", conta_consultar(&conta_global));
     return 0;
 }
