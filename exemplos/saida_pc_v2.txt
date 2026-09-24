@@ -1,0 +1,127 @@
+﻿Semente: 42 (passe-a como argumento para repetir esta execucao)
+Produtores: 3 | Itens por produtor: 4 (total 12) | Consumidores: 3
+
+[20:38:43] PRODUTOR 1 - CRIADA
+[20:38:43] PRODUTOR 1 - ENTROU na regiao critica
+[20:38:43] PRODUTOR 1 - inseriu o valor 101 no buffer
+        buffer: [ 101 | _ | _ | _ | _ ]
+[20:38:43] PRODUTOR 1 - SAIU da regiao critica
+[20:38:43] PRODUTOR 2 - CRIADA
+[20:38:43] PRODUTOR 2 - ENTROU na regiao critica
+[20:38:43] PRODUTOR 2 - inseriu o valor 201 no buffer
+        buffer: [ 101 | 201 | _ | _ | _ ]
+[20:38:43] PRODUTOR 2 - SAIU da regiao critica
+[20:38:43] PRODUTOR 3 - CRIADA
+[20:38:43] PRODUTOR 3 - ENTROU na regiao critica
+[20:38:43] PRODUTOR 3 - inseriu o valor 301 no buffer
+        buffer: [ 101 | 201 | 301 | _ | _ ]
+[20:38:43] PRODUTOR 3 - SAIU da regiao critica
+[20:38:43] CONSUMIDOR 1 - CRIADA
+[20:38:43] CONSUMIDOR 1 - ENTROU na regiao critica
+[20:38:43] CONSUMIDOR 1 - retirou o valor 101 do buffer
+        buffer: [ _ | 201 | 301 | _ | _ ]
+[20:38:43] CONSUMIDOR 1 - SAIU da regiao critica
+[20:38:43] CONSUMIDOR 2 - CRIADA
+[20:38:43] CONSUMIDOR 2 - ENTROU na regiao critica
+[20:38:43] CONSUMIDOR 2 - retirou o valor 201 do buffer
+        buffer: [ _ | _ | 301 | _ | _ ]
+[20:38:43] CONSUMIDOR 2 - SAIU da regiao critica
+[20:38:43] CONSUMIDOR 3 - CRIADA
+[20:38:43] CONSUMIDOR 3 - ENTROU na regiao critica
+[20:38:43] CONSUMIDOR 3 - retirou o valor 301 do buffer
+        buffer: [ _ | _ | _ | _ | _ ]
+[20:38:43] CONSUMIDOR 3 - SAIU da regiao critica
+[20:38:44] PRODUTOR 3 - ENTROU na regiao critica
+[20:38:44] PRODUTOR 3 - inseriu o valor 302 no buffer
+        buffer: [ _ | _ | _ | 302 | _ ]
+[20:38:44] PRODUTOR 3 - SAIU da regiao critica
+[20:38:44] PRODUTOR 2 - ENTROU na regiao critica
+[20:38:44] PRODUTOR 2 - inseriu o valor 202 no buffer
+        buffer: [ _ | _ | _ | 302 | 202 ]
+[20:38:44] PRODUTOR 2 - SAIU da regiao critica
+[20:38:44] PRODUTOR 1 - ENTROU na regiao critica
+[20:38:44] PRODUTOR 1 - inseriu o valor 102 no buffer
+        buffer: [ 102 | _ | _ | 302 | 202 ]
+[20:38:44] PRODUTOR 1 - SAIU da regiao critica
+[20:38:45] CONSUMIDOR 1 - ENTROU na regiao critica
+[20:38:45] CONSUMIDOR 1 - retirou o valor 302 do buffer
+        buffer: [ 102 | _ | _ | _ | 202 ]
+[20:38:45] CONSUMIDOR 1 - SAIU da regiao critica
+[20:38:45] CONSUMIDOR 2 - ENTROU na regiao critica
+[20:38:45] CONSUMIDOR 2 - retirou o valor 202 do buffer
+        buffer: [ 102 | _ | _ | _ | _ ]
+[20:38:45] CONSUMIDOR 2 - SAIU da regiao critica
+[20:38:45] CONSUMIDOR 3 - ENTROU na regiao critica
+[20:38:45] CONSUMIDOR 3 - retirou o valor 102 do buffer
+        buffer: [ _ | _ | _ | _ | _ ]
+[20:38:45] CONSUMIDOR 3 - SAIU da regiao critica
+[20:38:45] PRODUTOR 1 - ENTROU na regiao critica
+[20:38:45] PRODUTOR 1 - inseriu o valor 103 no buffer
+        buffer: [ _ | 103 | _ | _ | _ ]
+[20:38:45] PRODUTOR 1 - SAIU da regiao critica
+[20:38:45] PRODUTOR 2 - ENTROU na regiao critica
+[20:38:45] PRODUTOR 2 - inseriu o valor 203 no buffer
+        buffer: [ _ | 103 | 203 | _ | _ ]
+[20:38:45] PRODUTOR 2 - SAIU da regiao critica
+[20:38:45] PRODUTOR 3 - ENTROU na regiao critica
+[20:38:45] PRODUTOR 3 - inseriu o valor 303 no buffer
+        buffer: [ _ | 103 | 203 | 303 | _ ]
+[20:38:45] PRODUTOR 3 - SAIU da regiao critica
+[20:38:46] PRODUTOR 1 - ENTROU na regiao critica
+[20:38:46] PRODUTOR 2 - BLOQUEADA (buffer cheio, aguardando vaga)
+[20:38:46] PRODUTOR 1 - inseriu o valor 104 no buffer
+        buffer: [ _ | 103 | 203 | 303 | 104 ]
+[20:38:46] PRODUTOR 1 - SAIU da regiao critica
+[20:38:46] PRODUTOR 3 - ENTROU na regiao critica
+[20:38:46] PRODUTOR 3 - inseriu o valor 304 no buffer
+        buffer: [ 304 | 103 | 203 | 303 | 104 ]
+[20:38:46] PRODUTOR 3 - SAIU da regiao critica
+[20:38:47] CONSUMIDOR 2 - ENTROU na regiao critica
+[20:38:47] CONSUMIDOR 2 - retirou o valor 103 do buffer
+        buffer: [ 304 | _ | 203 | 303 | 104 ]
+[20:38:47] CONSUMIDOR 2 - SAIU da regiao critica
+[20:38:47] CONSUMIDOR 3 - ENTROU na regiao critica
+[20:38:47] CONSUMIDOR 3 - retirou o valor 203 do buffer
+        buffer: [ 304 | _ | _ | 303 | 104 ]
+[20:38:47] CONSUMIDOR 3 - SAIU da regiao critica
+[20:38:47] CONSUMIDOR 1 - ENTROU na regiao critica
+[20:38:47] CONSUMIDOR 1 - retirou o valor 303 do buffer
+        buffer: [ 304 | _ | _ | _ | 104 ]
+[20:38:47] CONSUMIDOR 1 - SAIU da regiao critica
+[20:38:47] PRODUTOR 2 - ENTROU na regiao critica
+[20:38:47] PRODUTOR 2 - inseriu o valor 204 no buffer
+        buffer: [ 304 | 204 | _ | _ | 104 ]
+[20:38:47] PRODUTOR 2 - SAIU da regiao critica
+[20:38:47] PRODUTOR 1 - FINALIZADA
+[20:38:47] PRODUTOR 3 - FINALIZADA
+[20:38:48] PRODUTOR 2 - FINALIZADA
+[20:38:49] CONSUMIDOR 1 - ENTROU na regiao critica
+[20:38:49] CONSUMIDOR 1 - retirou o valor 104 do buffer
+        buffer: [ 304 | 204 | -1 | -1 | _ ]
+[20:38:49] CONSUMIDOR 1 - SAIU da regiao critica
+[20:38:49] CONSUMIDOR 2 - ENTROU na regiao critica
+[20:38:49] CONSUMIDOR 2 - retirou o valor 304 do buffer
+        buffer: [ _ | 204 | -1 | -1 | _ ]
+[20:38:49] CONSUMIDOR 2 - SAIU da regiao critica
+[20:38:49] CONSUMIDOR 3 - ENTROU na regiao critica
+[20:38:49] CONSUMIDOR 3 - retirou o valor 204 do buffer
+        buffer: [ _ | _ | -1 | -1 | _ ]
+[20:38:49] CONSUMIDOR 3 - SAIU da regiao critica
+[20:38:49] MAIN 0 - todos os produtores terminaram; sinais de encerramento enviados
+[20:38:51] CONSUMIDOR 1 - ENTROU na regiao critica
+[20:38:51] CONSUMIDOR 1 - recebeu sinal de encerramento
+        buffer: [ _ | _ | _ | -1 | -1 ]
+[20:38:51] CONSUMIDOR 1 - SAIU da regiao critica
+[20:38:51] CONSUMIDOR 1 - FINALIZADA
+[20:38:51] CONSUMIDOR 3 - ENTROU na regiao critica
+[20:38:51] CONSUMIDOR 3 - recebeu sinal de encerramento
+        buffer: [ _ | _ | _ | _ | -1 ]
+[20:38:51] CONSUMIDOR 3 - SAIU da regiao critica
+[20:38:51] CONSUMIDOR 3 - FINALIZADA
+[20:38:51] CONSUMIDOR 2 - ENTROU na regiao critica
+[20:38:51] CONSUMIDOR 2 - recebeu sinal de encerramento
+        buffer: [ _ | _ | _ | _ | _ ]
+[20:38:51] CONSUMIDOR 2 - SAIU da regiao critica
+[20:38:51] CONSUMIDOR 2 - FINALIZADA
+
+Buffer final:         buffer: [ _ | _ | _ | _ | _ ]

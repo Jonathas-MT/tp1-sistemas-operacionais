@@ -1,0 +1,4 @@
+﻿Semente: 42 (passe-a como argumento para repetir esta execucao)
+Leitores: 6 | Escritores: 2 | Valores dos escritores: +340 -70
+Saldo inicial: 3100
+

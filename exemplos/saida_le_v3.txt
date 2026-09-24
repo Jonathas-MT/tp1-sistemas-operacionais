@@ -1,0 +1,74 @@
+﻿Semente: 106457680 (passe-a como argumento para repetir esta execucao)
+Leitores: 5 | Escritores: 5 | Valores dos escritores: -170 -110 +240 -300 +440
+Saldo inicial: 3220 | Saldo esperado se nao houvesse problema: 3320
+
+[20:33:50] ESCRITOR 1 - CRIADA
+[20:33:50] ESCRITOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:33:50] ESCRITOR 1 - LEU saldo = 3220 (vai aplicar -170)
+[20:33:50] LEITOR 1 - CRIADA
+[20:33:50] LEITOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:33:50] LEITOR 1 - LEU o saldo (saldo = 3220)
+[20:33:50] LEITOR 1 - ATENCAO: leu com 1 escritor(es) ativo(s); o dado pode estar desatualizado (leitura suja)
+[20:33:51] ESCRITOR 2 - CRIADA
+[20:33:51] ESCRITOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:33:51] ESCRITOR 2 - LEU saldo = 3220 (vai aplicar -110)
+[20:33:51] LEITOR 2 - CRIADA
+[20:33:51] LEITOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:33:51] LEITOR 2 - LEU o saldo (saldo = 3220)
+[20:33:51] LEITOR 2 - ATENCAO: leu com 2 escritor(es) ativo(s); o dado pode estar desatualizado (leitura suja)
+[20:33:52] ESCRITOR 3 - CRIADA
+[20:33:52] ESCRITOR 3 - ENTROU na regiao critica (SEM protecao)
+[20:33:52] ESCRITOR 3 - LEU saldo = 3220 (vai aplicar +240)
+[20:33:52] LEITOR 3 - CRIADA
+[20:33:52] LEITOR 3 - ENTROU na regiao critica (SEM protecao)
+[20:33:52] LEITOR 3 - LEU o saldo (saldo = 3220)
+[20:33:52] LEITOR 3 - ATENCAO: leu com 3 escritor(es) ativo(s); o dado pode estar desatualizado (leitura suja)
+[20:33:53] ESCRITOR 4 - CRIADA
+[20:33:53] ESCRITOR 4 - ENTROU na regiao critica (SEM protecao)
+[20:33:53] ESCRITOR 4 - LEU saldo = 3220 (vai aplicar -300)
+[20:33:53] ESCRITOR 1 - GRAVOU saldo = 3050 (calculado a partir do saldo 3220 lido antes)
+[20:33:53] ESCRITOR 1 - SAIU da regiao critica (saldo = 3050)
+[20:33:53] ESCRITOR 1 - FINALIZADA
+[20:33:53] LEITOR 1 - SAIU da regiao critica (saldo = 3220)
+[20:33:53] LEITOR 1 - FINALIZADA
+[20:33:53] LEITOR 4 - CRIADA
+[20:33:53] LEITOR 4 - ENTROU na regiao critica (SEM protecao)
+[20:33:53] LEITOR 4 - LEU o saldo (saldo = 3050)
+[20:33:53] LEITOR 4 - ATENCAO: leu com 3 escritor(es) ativo(s); o dado pode estar desatualizado (leitura suja)
+[20:33:54] ESCRITOR 2 - PROBLEMA: saldo mudou de 3220 para 3050 durante minha operacao; vou SOBRESCREVER a atualizacao de outro escritor
+[20:33:54] ESCRITOR 2 - GRAVOU saldo = 3110 (calculado a partir do saldo 3220 lido antes)
+[20:33:54] ESCRITOR 2 - SAIU da regiao critica (saldo = 3110)
+[20:33:54] ESCRITOR 2 - FINALIZADA
+[20:33:54] ESCRITOR 5 - CRIADA
+[20:33:54] ESCRITOR 5 - ENTROU na regiao critica (SEM protecao)
+[20:33:54] ESCRITOR 5 - LEU saldo = 3110 (vai aplicar +440)
+[20:33:54] LEITOR 2 - SAIU da regiao critica (saldo = 3220)
+[20:33:54] LEITOR 2 - FINALIZADA
+[20:33:54] LEITOR 5 - CRIADA
+[20:33:54] LEITOR 5 - ENTROU na regiao critica (SEM protecao)
+[20:33:54] LEITOR 5 - LEU o saldo (saldo = 3110)
+[20:33:54] LEITOR 5 - ATENCAO: leu com 3 escritor(es) ativo(s); o dado pode estar desatualizado (leitura suja)
+[20:33:55] ESCRITOR 3 - PROBLEMA: saldo mudou de 3220 para 3110 durante minha operacao; vou SOBRESCREVER a atualizacao de outro escritor
+[20:33:55] ESCRITOR 3 - GRAVOU saldo = 3460 (calculado a partir do saldo 3220 lido antes)
+[20:33:55] ESCRITOR 3 - SAIU da regiao critica (saldo = 3460)
+[20:33:55] ESCRITOR 3 - FINALIZADA
+[20:33:55] LEITOR 3 - SAIU da regiao critica (saldo = 3220)
+[20:33:55] LEITOR 3 - FINALIZADA
+[20:33:56] ESCRITOR 4 - PROBLEMA: saldo mudou de 3220 para 3460 durante minha operacao; vou SOBRESCREVER a atualizacao de outro escritor
+[20:33:56] ESCRITOR 4 - GRAVOU saldo = 2920 (calculado a partir do saldo 3220 lido antes)
+[20:33:56] ESCRITOR 4 - SAIU da regiao critica (saldo = 2920)
+[20:33:56] ESCRITOR 4 - FINALIZADA
+[20:33:56] LEITOR 4 - SAIU da regiao critica (saldo = 3050)
+[20:33:56] LEITOR 4 - FINALIZADA
+[20:33:57] ESCRITOR 5 - PROBLEMA: saldo mudou de 3110 para 2920 durante minha operacao; vou SOBRESCREVER a atualizacao de outro escritor
+[20:33:57] ESCRITOR 5 - GRAVOU saldo = 3550 (calculado a partir do saldo 3110 lido antes)
+[20:33:57] ESCRITOR 5 - SAIU da regiao critica (saldo = 3550)
+[20:33:57] ESCRITOR 5 - FINALIZADA
+[20:33:57] LEITOR 5 - SAIU da regiao critica (saldo = 3110)
+[20:33:57] LEITOR 5 - FINALIZADA
+
+===== RESULTADO =====
+Saldo esperado: 3320
+Saldo obtido:   3550
+INCONSISTENTE: o saldo final difere do esperado em +230, porque atualizacoes foram
+perdidas/sobrescritas por falta de controle de concorrencia.

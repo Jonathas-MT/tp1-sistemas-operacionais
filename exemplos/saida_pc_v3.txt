@@ -1,0 +1,112 @@
+﻿Semente: 2049731252 (passe-a como argumento para repetir esta execucao)
+Produtores: 2 | Itens por produtor: 5 (total 10) | Consumidores: 2
+
+[20:33:58] PRODUTOR 1 - CRIADA
+[20:33:58] PRODUTOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:33:58] PRODUTOR 2 - CRIADA
+[20:33:58] PRODUTOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:33:58] CONSUMIDOR 1 - CRIADA
+[20:33:58] CONSUMIDOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:33:58] CONSUMIDOR 2 - CRIADA
+[20:33:58] CONSUMIDOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:33:58] PRODUTOR 1 - PROBLEMA: posicao 0 ainda guarda o valor 201 (nao consumido); SOBRESCREVENDO com 101 - dado PERDIDO
+[20:33:58] PRODUTOR 2 - inseriu o valor 201 no buffer
+        buffer: [ 101 | _ | _ | _ | _ ]  (entrada=1 saida=1 quantidade=1)
+[20:33:58] CONSUMIDOR 1 - retirou o valor 201 do buffer
+        buffer: [ 101 | _ | _ | _ | _ ]  (entrada=1 saida=1 quantidade=1)
+[20:33:58] CONSUMIDOR 1 - SAIU da regiao critica
+[20:33:58] PRODUTOR 1 - inseriu o valor 101 no buffer
+        buffer: [ 101 | _ | _ | _ | _ ]  (entrada=1 saida=1 quantidade=1)
+[20:33:58] PRODUTOR 1 - SAIU da regiao critica
+[20:33:58] PRODUTOR 2 - SAIU da regiao critica
+[20:33:58] CONSUMIDOR 2 - PROBLEMA: posicao 0 esta VAZIA; consumindo mesmo assim (buffer vazio)
+[20:33:58] CONSUMIDOR 2 - retirou LIXO (posicao vazia)
+        buffer: [ _ | _ | _ | _ | _ ]  (entrada=1 saida=1 quantidade=-1)
+[20:33:58] CONSUMIDOR 2 - SAIU da regiao critica
+[20:33:59] PRODUTOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:33:59] PRODUTOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:00] PRODUTOR 1 - inseriu o valor 102 no buffer
+[20:34:00] PRODUTOR 2 - PROBLEMA: posicao 1 ainda guarda o valor 102 (nao consumido); SOBRESCREVENDO com 202 - dado PERDIDO
+[20:34:00] PRODUTOR 2 - inseriu o valor 202 no buffer
+        buffer: [ _ | 202 | _ | _ | _ ]  (entrada=2 saida=1 quantidade=0)
+[20:34:00] PRODUTOR 2 - SAIU da regiao critica
+        buffer: [ _ | 202 | _ | _ | _ ]  (entrada=2 saida=1 quantidade=0)
+[20:34:00] PRODUTOR 1 - SAIU da regiao critica
+[20:34:00] CONSUMIDOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:00] CONSUMIDOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:01] CONSUMIDOR 2 - retirou o valor 202 do buffer
+[20:34:01] CONSUMIDOR 1 - PROBLEMA: posicao 1 esta VAZIA; consumindo mesmo assim (buffer vazio)
+        buffer: [ _ | _ | _ | _ | _ ]  (entrada=2 saida=2 quantidade=-1)
+[20:34:01] CONSUMIDOR 1 - retirou LIXO (posicao vazia)
+        buffer: [ _ | _ | _ | _ | _ ]  (entrada=2 saida=2 quantidade=-1)
+[20:34:01] CONSUMIDOR 1 - SAIU da regiao critica
+[20:34:01] CONSUMIDOR 2 - SAIU da regiao critica
+[20:34:01] PRODUTOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:01] PRODUTOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:01] PRODUTOR 2 - inseriu o valor 203 no buffer
+        buffer: [ _ | _ | 203 | _ | _ ]  (entrada=3 saida=2 quantidade=0)
+[20:34:01] PRODUTOR 2 - SAIU da regiao critica
+[20:34:01] PRODUTOR 1 - PROBLEMA: posicao 2 ainda guarda o valor 203 (nao consumido); SOBRESCREVENDO com 103 - dado PERDIDO
+[20:34:01] PRODUTOR 1 - inseriu o valor 103 no buffer
+        buffer: [ _ | _ | 103 | _ | _ ]  (entrada=3 saida=2 quantidade=0)
+[20:34:01] PRODUTOR 1 - SAIU da regiao critica
+[20:34:02] PRODUTOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:02] PRODUTOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:02] PRODUTOR 2 - inseriu o valor 204 no buffer
+        buffer: [ _ | _ | 103 | 204 | _ ]  (entrada=4 saida=2 quantidade=1)
+[20:34:02] PRODUTOR 2 - SAIU da regiao critica
+[20:34:02] PRODUTOR 1 - PROBLEMA: posicao 3 ainda guarda o valor 204 (nao consumido); SOBRESCREVENDO com 104 - dado PERDIDO
+[20:34:02] PRODUTOR 1 - inseriu o valor 104 no buffer
+        buffer: [ _ | _ | 103 | 104 | _ ]  (entrada=4 saida=2 quantidade=1)
+[20:34:02] PRODUTOR 1 - SAIU da regiao critica
+[20:34:03] CONSUMIDOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:03] CONSUMIDOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:03] CONSUMIDOR 2 - retirou o valor 103 do buffer
+[20:34:03] CONSUMIDOR 1 - PROBLEMA: posicao 2 esta VAZIA; consumindo mesmo assim (buffer vazio)
+[20:34:03] CONSUMIDOR 1 - retirou LIXO (posicao vazia)
+        buffer: [ _ | _ | _ | 104 | _ ]  (entrada=4 saida=3 quantidade=0)
+[20:34:03] CONSUMIDOR 1 - SAIU da regiao critica
+        buffer: [ _ | _ | _ | 104 | _ ]  (entrada=4 saida=3 quantidade=0)
+[20:34:03] CONSUMIDOR 2 - SAIU da regiao critica
+[20:34:03] PRODUTOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:03] PRODUTOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:04] PRODUTOR 2 - inseriu o valor 205 no buffer
+        buffer: [ _ | _ | _ | 104 | 205 ]  (entrada=0 saida=3 quantidade=1)
+[20:34:04] PRODUTOR 2 - SAIU da regiao critica
+[20:34:04] PRODUTOR 2 - FINALIZADA
+[20:34:04] PRODUTOR 1 - PROBLEMA: posicao 4 ainda guarda o valor 205 (nao consumido); SOBRESCREVENDO com 105 - dado PERDIDO
+[20:34:04] PRODUTOR 1 - inseriu o valor 105 no buffer
+        buffer: [ _ | _ | _ | 104 | 105 ]  (entrada=0 saida=3 quantidade=1)
+[20:34:04] PRODUTOR 1 - SAIU da regiao critica
+[20:34:04] PRODUTOR 1 - FINALIZADA
+[20:34:05] CONSUMIDOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:05] CONSUMIDOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:05] CONSUMIDOR 2 - retirou o valor 104 do buffer
+[20:34:05] CONSUMIDOR 1 - PROBLEMA: posicao 3 esta VAZIA; consumindo mesmo assim (buffer vazio)
+[20:34:05] CONSUMIDOR 1 - retirou LIXO (posicao vazia)
+        buffer: [ _ | _ | _ | _ | 105 ]  (entrada=0 saida=4 quantidade=0)
+[20:34:05] CONSUMIDOR 1 - SAIU da regiao critica
+        buffer: [ _ | _ | _ | _ | 105 ]  (entrada=0 saida=4 quantidade=0)
+[20:34:05] CONSUMIDOR 2 - SAIU da regiao critica
+[20:34:07] CONSUMIDOR 1 - ENTROU na regiao critica (SEM protecao)
+[20:34:07] CONSUMIDOR 2 - ENTROU na regiao critica (SEM protecao)
+[20:34:08] CONSUMIDOR 2 - retirou o valor 105 do buffer
+        buffer: [ _ | _ | _ | _ | _ ]  (entrada=0 saida=0 quantidade=-1)
+[20:34:08] CONSUMIDOR 2 - SAIU da regiao critica
+[20:34:08] CONSUMIDOR 2 - FINALIZADA
+[20:34:08] CONSUMIDOR 1 - PROBLEMA: posicao 4 esta VAZIA; consumindo mesmo assim (buffer vazio)
+[20:34:08] CONSUMIDOR 1 - retirou LIXO (posicao vazia)
+        buffer: [ _ | _ | _ | _ | _ ]  (entrada=0 saida=0 quantidade=-1)
+[20:34:08] CONSUMIDOR 1 - SAIU da regiao critica
+[20:34:08] CONSUMIDOR 1 - FINALIZADA
+
+===== RESULTADO =====
+Itens produzidos: 10 | retiradas feitas pelos consumidores: 10
+Valores produzidos e NUNCA consumidos (sobrescritos ou esquecidos no buffer): 101 102 203 204 205 
+Sobrescritas de dado nao consumido:   5
+Leituras de posicao vazia (lixo):     5
+Consumos em duplicidade:              0
+Buffer no final (esperado: todo vazio e quantidade = 0):
+        buffer: [ _ | _ | _ | _ | _ ]  (entrada=0 saida=0 quantidade=-1)
+Itens realmente nas posicoes: 0 | quantidade registrada: -1
+INCONSISTENTE: o buffer foi corrompido por falta de controle de concorrencia.
