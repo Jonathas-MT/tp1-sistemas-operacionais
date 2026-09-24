@@ -14,6 +14,11 @@
  * Tema: nenhum tema de negocio especifico (ex: banco/loja) foi
  * combinado pela equipe para esta parte; o buffer guarda apenas
  * inteiros, representando "itens" genericos produzidos/consumidos.
+ *
+ * Entrada: gerada aleatoriamente por common/gerador.c (quantidade de
+ * produtores e itens por produtor; esta versao tem sempre 1 consumidor).
+ * A semente sorteada e impressa; para repetir a mesma entrada, passe-a
+ * como argumento na linha de comando.
  */
 
 #include <stdio.h>
@@ -23,6 +28,7 @@
 #include <unistd.h>
 #include "../buffer.h"
 #include "../../common/log.h"
+#include "../../common/gerador.h"
 
 #define CAPACIDADE_BUFFER      5   /* decisao da equipe: buffer de 5 posicoes */
 #define DELAY_PRODUTOR         1   /* segundos entre cada item produzido */
@@ -116,16 +122,18 @@ void *tarefa_consumidor(void *arg) {
     return NULL;
 }
 
-int main(void) {
-    /* ------------------------------------------------------------
-     * ENTRADA TEMPORARIA PARA TESTE.
-     * O Jonathas vai substituir este bloco pela entrada gerada
-     * (gerador.h/gerador.c ou config.h): quantidade de produtores e
-     * quantidade de itens de cada um. Por enquanto uso valores fixos
-     * para conseguir compilar e testar esta versao isoladamente.
-     * ------------------------------------------------------------ */
-    int n_produtores = 3;
-    int itens_por_produtor = 4; /* total de itens = 3 x 4 = 12 */
+int main(int argc, char **argv) {
+    /* Entrada gerada aleatoriamente (common/gerador.c). Para repetir uma
+       execucao, passe a semente impressa: ./pc_v1 <semente> */
+    unsigned int semente = gerador_iniciar(argc > 1 ? (unsigned int) strtoul(argv[1], NULL, 10) : 0);
+    ConfigPC cfg = gerador_produtores_consumidores();
+
+    int n_produtores = cfg.n_produtores;
+    int itens_por_produtor = cfg.itens_por_produtor;
+
+    printf("Semente: %u (passe-a como argumento para repetir esta execucao)\n", semente);
+    printf("Produtores: %d | Itens por produtor: %d (total %d) | 1 consumidor\n\n",
+           n_produtores, itens_por_produtor, n_produtores * itens_por_produtor);
 
     buffer_global = buffer_criar(CAPACIDADE_BUFFER);
     sem_init(&vazio, 0, CAPACIDADE_BUFFER);

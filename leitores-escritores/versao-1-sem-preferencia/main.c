@@ -13,6 +13,11 @@
  * Tema: Banco. Leitor = consulta de saldo. Escritor = deposito ou saque.
  * Delays (decisao da equipe): leitor 3s, escritor 3s (nenhum tem
  * preferencia por velocidade tambem).
+ *
+ * Entrada: gerada aleatoriamente por common/gerador.c (quantidade de
+ * leitores e escritores, saldo inicial e valores dos escritores). A
+ * semente sorteada e impressa; para repetir a mesma entrada, passe-a
+ * como argumento na linha de comando.
  */
 
 #include <stdio.h>
@@ -24,10 +29,10 @@
 #include <unistd.h>
 #include "../conta.h"
 #include "../../common/log.h"
+#include "../../common/gerador.h"
 
 #define DELAY_LEITOR    3
 #define DELAY_ESCRITOR  3
-#define SALDO_INICIAL   1000
 
 /* Semaforo NOMEADO (sem_open/sem_close/sem_unlink) em vez de anonimo
    (sem_init/sem_destroy). O macOS marca a familia "anonima" como
@@ -84,20 +89,24 @@ void *leitor_v1(void *arg) {
     return NULL;
 }
 
-int main(void) {
-    /* ------------------------------------------------------------
-     * ENTRADA TEMPORARIA PARA TESTE.
-     * O Jonathas vai substituir este bloco pela entrada gerada
-     * aleatoriamente (gerador.h/gerador.c): quantidade de leitores,
-     * quantidade de escritores e valores dos escritores. Por
-     * enquanto uso valores fixos para eu compilar e testar a v1
-     * isoladamente.
-     * ------------------------------------------------------------ */
-    int n_leitores = 4;
-    int n_escritores = 3;
-    int valores_escritores[] = {100, -50, 200};
+int main(int argc, char **argv) {
+    /* Entrada gerada aleatoriamente (common/gerador.c). Para repetir uma
+       execucao, passe a semente impressa: ./le_v1 <semente> */
+    unsigned int semente = gerador_iniciar(argc > 1 ? (unsigned int) strtoul(argv[1], NULL, 10) : 0);
+    ConfigLE cfg = gerador_leitores_escritores();
 
-    conta_criar(&conta_global, SALDO_INICIAL);
+    int n_leitores = cfg.n_leitores;
+    int n_escritores = cfg.n_escritores;
+    int *valores_escritores = cfg.valores_escritores;
+
+    printf("Semente: %u (passe-a como argumento para repetir esta execucao)\n", semente);
+    printf("Leitores: %d | Escritores: %d | Valores dos escritores:", n_leitores, n_escritores);
+    for (int i = 0; i < n_escritores; i++) {
+        printf(" %+d", valores_escritores[i]);
+    }
+    printf("\nSaldo inicial: %d\n\n", cfg.saldo_inicial);
+
+    conta_criar(&conta_global, cfg.saldo_inicial);
 
     /* sem_unlink antes de abrir: remove qualquer semaforo com esse
        nome deixado "sujo" por uma execucao anterior que tenha sido
@@ -133,5 +142,6 @@ int main(void) {
     sem_close(mutex_escrita);
     sem_unlink(NOME_SEM_ESCRITA);
     printf("\nSaldo final: %d\n", conta_consultar(&conta_global));
+    gerador_liberar_le(&cfg);
     return 0;
 }

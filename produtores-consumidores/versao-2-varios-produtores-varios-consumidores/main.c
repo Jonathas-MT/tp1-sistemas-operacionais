@@ -8,6 +8,11 @@
  * main insere um VALOR_SENTINELA no buffer para CADA consumidor (um
  * "bilhete de saida" por consumidor). Assim cada consumidor recebe
  * exatamente um sinal e nenhum fica esperando para sempre.
+ *
+ * Entrada: gerada aleatoriamente por common/gerador.c (quantidade de
+ * produtores, itens por produtor e quantidade de consumidores). A
+ * semente sorteada e impressa; para repetir a mesma entrada, passe-a
+ * como argumento na linha de comando.
  */
 
 #include <stdio.h>
@@ -17,6 +22,7 @@
 #include <unistd.h>
 #include "../buffer.h"
 #include "../../common/log.h"
+#include "../../common/gerador.h"
 
 #define CAPACIDADE_BUFFER      5
 #define DELAY_PRODUTOR         1
@@ -107,11 +113,19 @@ void *tarefa_consumidor(void *arg) {
     return NULL;
 }
 
-int main(void) {
-    /* ENTRADA TEMPORARIA PARA TESTE (ver comentario na v1). */
-    int n_produtores = 3;
-    int itens_por_produtor = 4;  /* total de itens = 3 x 4 = 12 */
-    int n_consumidores = 2;
+int main(int argc, char **argv) {
+    /* Entrada gerada aleatoriamente (common/gerador.c). Para repetir uma
+       execucao, passe a semente impressa: ./pc_v2 <semente> */
+    unsigned int semente = gerador_iniciar(argc > 1 ? (unsigned int) strtoul(argv[1], NULL, 10) : 0);
+    ConfigPC cfg = gerador_produtores_consumidores();
+
+    int n_produtores = cfg.n_produtores;
+    int itens_por_produtor = cfg.itens_por_produtor;
+    int n_consumidores = cfg.n_consumidores;
+
+    printf("Semente: %u (passe-a como argumento para repetir esta execucao)\n", semente);
+    printf("Produtores: %d | Itens por produtor: %d (total %d) | Consumidores: %d\n\n",
+           n_produtores, itens_por_produtor, n_produtores * itens_por_produtor, n_consumidores);
 
     buffer_global = buffer_criar(CAPACIDADE_BUFFER);
     sem_init(&vazio, 0, CAPACIDADE_BUFFER);

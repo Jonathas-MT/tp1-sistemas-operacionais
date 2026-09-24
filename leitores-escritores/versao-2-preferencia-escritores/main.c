@@ -26,6 +26,11 @@
  * macOS (Darwin nao implementa suporte completo); a nomeada funciona
  * sem warning tanto no macOS quanto no Linux. Mesma solucao aplicada
  * na v1, para manter as duas versoes consistentes.
+ *
+ * Entrada: gerada aleatoriamente por common/gerador.c (quantidade de
+ * leitores e escritores, saldo inicial e valores dos escritores). A
+ * semente sorteada e impressa; para repetir a mesma entrada, passe-a
+ * como argumento na linha de comando.
  */
 
 #include <stdio.h>
@@ -37,10 +42,10 @@
 #include <unistd.h>
 #include "../conta.h"
 #include "../../common/log.h"
+#include "../../common/gerador.h"
 
 #define DELAY_LEITOR    3
 #define DELAY_ESCRITOR  1
-#define SALDO_INICIAL   1000
 
 #define NOME_SEM_MUTEX_LEITORES   "/tp1_rw_v2_mutex_leitores"
 #define NOME_SEM_MUTEX_ESCRITORES "/tp1_rw_v2_mutex_escritores"
@@ -146,18 +151,24 @@ void *leitor_v2(void *arg) {
     return NULL;
 }
 
-int main(void) {
-    /* ------------------------------------------------------------
-     * ENTRADA TEMPORARIA PARA TESTE.
-     * O Jonathas vai substituir este bloco pela entrada gerada
-     * aleatoriamente (gerador.h/gerador.c). Por enquanto uso valores
-     * fixos para eu compilar e testar a v2 isoladamente.
-     * ------------------------------------------------------------ */
-    int n_leitores = 4;
-    int n_escritores = 3;
-    int valores_escritores[] = {100, -50, 200};
+int main(int argc, char **argv) {
+    /* Entrada gerada aleatoriamente (common/gerador.c). Para repetir uma
+       execucao, passe a semente impressa: ./le_v2 <semente> */
+    unsigned int semente = gerador_iniciar(argc > 1 ? (unsigned int) strtoul(argv[1], NULL, 10) : 0);
+    ConfigLE cfg = gerador_leitores_escritores();
 
-    conta_criar(&conta_global, SALDO_INICIAL);
+    int n_leitores = cfg.n_leitores;
+    int n_escritores = cfg.n_escritores;
+    int *valores_escritores = cfg.valores_escritores;
+
+    printf("Semente: %u (passe-a como argumento para repetir esta execucao)\n", semente);
+    printf("Leitores: %d | Escritores: %d | Valores dos escritores:", n_leitores, n_escritores);
+    for (int i = 0; i < n_escritores; i++) {
+        printf(" %+d", valores_escritores[i]);
+    }
+    printf("\nSaldo inicial: %d\n\n", cfg.saldo_inicial);
+
+    conta_criar(&conta_global, cfg.saldo_inicial);
     mutex_leitores   = abrir_semaforo(NOME_SEM_MUTEX_LEITORES, 1);
     mutex_escritores = abrir_semaforo(NOME_SEM_MUTEX_ESCRITORES, 1);
     r                = abrir_semaforo(NOME_SEM_R, 1);
@@ -193,5 +204,6 @@ int main(void) {
     sem_unlink(NOME_SEM_W);
 
     printf("\nSaldo final: %d\n", conta_consultar(&conta_global));
+    gerador_liberar_le(&cfg);
     return 0;
 }
