@@ -334,11 +334,8 @@ O relatório do trabalho apresenta:
 * Problemas observados nas versões sem controle de concorrência;
 * Considerações finais.
 
-O relatório está disponível em:
-
-```text
-relatorio/relatorio.pdf
-```
+O relatório está em `relatorio/main.tex` (compilar com `pdflatex main.tex`
+para gerar `relatorio/main.pdf`).
 
 ---
 
@@ -391,13 +388,13 @@ Exemplos de documentação:
 
 🚧 **Em desenvolvimento**
 
-* [ ] Leitores × Escritores — Versão 1
-* [ ] Leitores × Escritores — Versão 2
-* [ ] Leitores × Escritores — Versão 3
-* [ ] Produtores × Consumidores — Versão 1
-* [ ] Produtores × Consumidores — Versão 2
-* [ ] Produtores × Consumidores — Versão 3
-* [ ] Testes
-* [ ] Exemplos de execução
-* [ ] Relatório
-* [ ] Revisão final
+* [X] Leitores × Escritores — Versão 1
+* [X] Leitores × Escritores — Versão 2
+* [X] Leitores × Escritores — Versão 3
+* [X] Produtores × Consumidores — Versão 1
+* [X] Produtores × Consumidores — Versão 2
+* [X] Produtores × Consumidores — Versão 3
+* [X] Testes
+* [X] Exemplos de execução
+* [X] Relatório
+* [X] Revisão final
