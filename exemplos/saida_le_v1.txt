@@ -1,4 +1,37 @@
-﻿Semente: 42 (passe-a como argumento para repetir esta execucao)
-Leitores: 6 | Escritores: 2 | Valores dos escritores: +340 -70
-Saldo inicial: 3100
+Semente: 42 (passe-a como argumento para repetir esta execucao)
+Leitores: 5 | Escritores: 2 | Valores dos escritores: -230 +220
+Saldo inicial: 3430
+
+[13:46:29] ESCRITOR 1 - CRIADA
+[13:46:29] ESCRITOR 2 - CRIADA
+[13:46:29] ESCRITOR 2 - BLOQUEADA (aguardando outro escritor)
+[13:46:29] ESCRITOR 2 - ENTROU na regiao critica
+[13:46:29] LEITOR 1 - CRIADA
+[13:46:29] LEITOR 1 - ENTROU na regiao critica
+[13:46:29] LEITOR 2 - CRIADA
+[13:46:29] LEITOR 2 - ENTROU na regiao critica
+[13:46:29] LEITOR 3 - CRIADA
+[13:46:29] LEITOR 3 - ENTROU na regiao critica
+[13:46:29] LEITOR 4 - CRIADA
+[13:46:29] LEITOR 4 - ENTROU na regiao critica
+[13:46:29] LEITOR 5 - CRIADA
+[13:46:29] LEITOR 5 - ENTROU na regiao critica
+[13:46:29] ESCRITOR 1 - BLOQUEADA (aguardando outro escritor)
+[13:46:32] LEITOR 5 - SAIU da regiao critica (saldo = 3650)
+[13:46:32] LEITOR 5 - FINALIZADA
+[13:46:32] LEITOR 4 - SAIU da regiao critica (saldo = 3650)
+[13:46:32] LEITOR 4 - FINALIZADA
+[13:46:32] LEITOR 3 - SAIU da regiao critica (saldo = 3650)
+[13:46:32] LEITOR 3 - FINALIZADA
+[13:46:32] LEITOR 2 - SAIU da regiao critica (saldo = 3650)
+[13:46:32] LEITOR 2 - FINALIZADA
+[13:46:32] LEITOR 1 - SAIU da regiao critica (saldo = 3650)
+[13:46:32] LEITOR 1 - FINALIZADA
+[13:46:32] ESCRITOR 2 - SAIU da regiao critica (saldo = 3650)
+[13:46:32] ESCRITOR 2 - FINALIZADA
+[13:46:32] ESCRITOR 1 - ENTROU na regiao critica
+[13:46:35] ESCRITOR 1 - SAIU da regiao critica (saldo = 3420)
+[13:46:35] ESCRITOR 1 - FINALIZADA
+
+Saldo final: 3420
 
