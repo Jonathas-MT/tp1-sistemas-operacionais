@@ -1,4 +1,44 @@
-﻿Semente: 42 (passe-a como argumento para repetir esta execucao)
-Leitores: 6 | Escritores: 2 | Valores dos escritores: +340 -70
-Saldo inicial: 3100
+Semente: 42 (passe-a como argumento para repetir esta execucao)
+Leitores: 5 | Escritores: 2 | Valores dos escritores: -230 +220
+Saldo inicial: 3430
+
+[13:46:35] ESCRITOR 1 - CRIADA
+[13:46:35] ESCRITOR 1 - BLOQUEANDO novos leitores (r)
+[13:46:35] ESCRITOR 1 - BLOQUEADA (aguardando acesso exclusivo)
+[13:46:35] ESCRITOR 1 - ENTROU na regiao critica
+[13:46:35] ESCRITOR 2 - CRIADA
+[13:46:35] ESCRITOR 2 - BLOQUEADA (aguardando acesso exclusivo)
+[13:46:35] LEITOR 1 - CRIADA
+[13:46:35] LEITOR 1 - BLOQUEADA (aguardando escritor ativo/esperando)
+[13:46:35] LEITOR 2 - CRIADA
+[13:46:35] LEITOR 2 - BLOQUEADA (aguardando escritor ativo/esperando)
+[13:46:35] LEITOR 3 - CRIADA
+[13:46:35] LEITOR 3 - BLOQUEADA (aguardando escritor ativo/esperando)
+[13:46:35] LEITOR 4 - CRIADA
+[13:46:35] LEITOR 4 - BLOQUEADA (aguardando escritor ativo/esperando)
+[13:46:35] LEITOR 5 - CRIADA
+[13:46:35] LEITOR 5 - BLOQUEADA (aguardando escritor ativo/esperando)
+[13:46:36] ESCRITOR 1 - SAIU da regiao critica (saldo = 3200)
+[13:46:36] ESCRITOR 2 - ENTROU na regiao critica
+[13:46:36] ESCRITOR 1 - FINALIZADA
+[13:46:37] ESCRITOR 2 - SAIU da regiao critica (saldo = 3420)
+[13:46:37] LEITOR 2 - ENTROU na regiao critica
+[13:46:37] LEITOR 3 - ENTROU na regiao critica
+[13:46:37] LEITOR 4 - ENTROU na regiao critica
+[13:46:37] LEITOR 5 - ENTROU na regiao critica
+[13:46:37] ESCRITOR 2 - LIBEROU novos leitores (r)
+[13:46:37] ESCRITOR 2 - FINALIZADA
+[13:46:37] LEITOR 1 - ENTROU na regiao critica
+[13:46:40] LEITOR 5 - SAIU da regiao critica (saldo = 3420)
+[13:46:40] LEITOR 5 - FINALIZADA
+[13:46:40] LEITOR 1 - SAIU da regiao critica (saldo = 3420)
+[13:46:40] LEITOR 1 - FINALIZADA
+[13:46:40] LEITOR 3 - SAIU da regiao critica (saldo = 3420)
+[13:46:40] LEITOR 3 - FINALIZADA
+[13:46:40] LEITOR 4 - SAIU da regiao critica (saldo = 3420)
+[13:46:40] LEITOR 4 - FINALIZADA
+[13:46:40] LEITOR 2 - SAIU da regiao critica (saldo = 3420)
+[13:46:40] LEITOR 2 - FINALIZADA
+
+Saldo final: 3420
 
