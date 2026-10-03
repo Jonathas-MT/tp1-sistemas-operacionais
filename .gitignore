@@ -1,2 +1,14 @@
+# Binarios compilados (Linux/macOS, sem extensao) - nunca commitar
+v1
+v2
+v1_pc
+v2_pc
+v3_le
+v3_pc
+*.o
+*.out
 *.exe
-*.exe
+*.dSYM/
+
+# Arquivos de sistema
+.DS_Store

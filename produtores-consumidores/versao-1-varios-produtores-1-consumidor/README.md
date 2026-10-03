@@ -2,7 +2,8 @@
 
 Buffer compartilhado de 5 posições (TAD `Buffer`, em
 `produtores-consumidores/buffer.h` / `buffer.c`), acessado por N threads
-produtoras e 1 thread consumidora.
+produtoras e 1 thread consumidora. A entrada (quantidade de produtores e
+itens por produtor) é gerada aleatoriamente por `common/gerador.c`.
 
 ## Sincronização usada
 
@@ -21,7 +22,7 @@ Quando todos os produtores terminam, a `main` insere um valor especial
 ## Compilar
 
 ```bash
-gcc -Wall -Wextra -o v1_pc produtores-consumidores/versao-1-varios-produtores-1-consumidor/main.c produtores-consumidores/buffer.c common/log.c -lpthread
+gcc -Wall -Wextra -o v1_pc produtores-consumidores/versao-1-varios-produtores-1-consumidor/main.c produtores-consumidores/buffer.c common/log.c common/gerador.c -lpthread
 ```
 
 ## Rodar
@@ -30,22 +31,21 @@ gcc -Wall -Wextra -o v1_pc produtores-consumidores/versao-1-varios-produtores-1-
 ./v1_pc
 ```
 
-Configuração atual de teste (valores fixos, temporários — ver comentário
-"ENTRADA TEMPORARIA" no início do `main()`): 3 produtores × 4 itens cada
-(12 itens no total), 1 consumidor. Produtor produz a cada 1s, consumidor
-consome a cada 2s — como o consumidor é mais lento, o buffer enche e os
-produtores ficam bloqueados algumas vezes (aparece no log como
-`BLOQUEADA (buffer cheio, aguardando vaga)`).
+A cada execução, o gerador sorteia a quantidade de produtores e de itens
+por produtor (esta versão sempre tem 1 consumidor), e imprime a semente
+usada. Para repetir a mesma entrada, passe a semente como argumento:
 
-Tempo esperado de execução: ~25s.
+```bash
+./v1_pc 123
+```
+
+Produtor produz a cada 1s, consumidor consome a cada 2s — como o
+consumidor é mais lento, o buffer costuma encher e os produtores ficam
+bloqueados algumas vezes (aparece no log como
+`BLOQUEADA (buffer cheio, aguardando vaga)`).
 
 ## Rodar várias vezes seguidas
 
 ```bash
 for i in 1 2 3; do echo "=== EXECUÇÃO $i ==="; ./v1_pc; echo; done
 ```
-
-## Se algo der errado
-
-Se a compilação ou a execução falhar, copie a mensagem de erro completa
-e leve para quem está com essa parte do trabalho.
