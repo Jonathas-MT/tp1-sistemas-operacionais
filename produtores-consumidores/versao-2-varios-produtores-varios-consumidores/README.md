@@ -2,7 +2,8 @@
 
 Buffer compartilhado de 5 posições (TAD `Buffer`, em
 `produtores-consumidores/buffer.h` / `buffer.c`), acessado por N threads
-produtoras e N threads consumidoras.
+produtoras e N threads consumidoras. A entrada (produtores, itens por
+produtor e consumidores) é gerada aleatoriamente por `common/gerador.c`.
 
 ## Sincronização usada
 
@@ -22,7 +23,7 @@ que cada um saiba que pode parar (sem ficar esperando para sempre).
 ## Compilar
 
 ```bash
-gcc -Wall -Wextra -o v2_pc produtores-consumidores/versao-2-varios-produtores-varios-consumidores/main.c produtores-consumidores/buffer.c common/log.c -lpthread
+gcc -Wall -Wextra -o v2_pc produtores-consumidores/versao-2-varios-produtores-varios-consumidores/main.c produtores-consumidores/buffer.c common/log.c common/gerador.c -lpthread
 ```
 
 ## Rodar
@@ -31,15 +32,17 @@ gcc -Wall -Wextra -o v2_pc produtores-consumidores/versao-2-varios-produtores-va
 ./v2_pc
 ```
 
-Configuração atual de teste (valores fixos, temporários — ver comentário
-"ENTRADA TEMPORARIA" no início do `main()`): 3 produtores × 4 itens cada
-(12 itens no total), 2 consumidores. Produtor produz a cada 1s, cada
-consumidor consome a cada 2s. Com 2 consumidores ativos dá para ver os
-dois cenários de bloqueio: buffer cheio (produtores bloqueados) no
-começo, e buffer vazio (consumidores bloqueados) perto do fim, quando os
-produtores já terminaram.
+A cada execução, o gerador sorteia produtores, itens por produtor e
+consumidores, e imprime a semente usada. Para repetir a mesma entrada:
 
-Tempo esperado de execução: ~20s.
+```bash
+./v2_pc 7
+```
+
+Produtor produz a cada 1s, cada consumidor consome a cada 2s. Com vários
+consumidores ativos dá para ver os dois cenários de bloqueio: buffer cheio
+(produtores bloqueados) no começo, e buffer vazio (consumidores
+bloqueados) perto do fim, quando os produtores já terminaram.
 
 ## Rodar várias vezes seguidas
 
@@ -54,7 +57,3 @@ vez de 1, e enviar um sinal de encerramento por consumidor (em vez de um
 único sinal). A lógica de sincronização (`vazio`, `cheio`, `mutex`) é
 idêntica à v1.
 
-## Se algo der errado
-
-Se a compilação ou a execução falhar, copie a mensagem de erro completa
-e leve para quem está com essa parte do trabalho.
