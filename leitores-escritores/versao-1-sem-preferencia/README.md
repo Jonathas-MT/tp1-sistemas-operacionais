@@ -59,6 +59,3 @@ for i in 1 2 3; do echo "=== EXECUÇÃO $i ==="; ./v1; echo; done
 for i in 1 2 3; do echo "=== EXECUÇÃO $i ==="; ./v2; echo; done
 ```
 
-## Se algo der errado
-
-Se a compilação ou a execução falhar, copie a mensagem de erro completa e leve para quem está com essa parte do trabalho.
