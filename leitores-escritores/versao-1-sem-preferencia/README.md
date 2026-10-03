@@ -1,7 +1,8 @@
 # Leitores × Escritores — TP1 Sistemas Operacionais
 
 Tema: Banco. Leitor = consulta de saldo. Escritor = depósito ou saque.
-Todas as versões compartilham o mesmo TAD `Conta` (`conta.h` / `conta.c`).
+Todas as versões compartilham o mesmo TAD `Conta` (`conta.h` / `conta.c`) e
+a mesma entrada gerada aleatoriamente por `common/gerador.c`.
 
 ## Pré-requisitos
 
@@ -13,7 +14,7 @@ Todas as versões compartilham o mesmo TAD `Conta` (`conta.h` / `conta.c`).
 Compilar:
 
 ```bash
-gcc -Wall -Wextra -o v1 leitores-escritores/versao-1-sem-preferencia/main.c leitores-escritores/conta.c common/log.c -lpthread
+gcc -Wall -Wextra -o v1 leitores-escritores/versao-1-sem-preferencia/main.c leitores-escritores/conta.c common/log.c common/gerador.c -lpthread
 ```
 
 Rodar:
@@ -22,14 +23,20 @@ Rodar:
 ./v1
 ```
 
-Tempo esperado de execução: ~9s (3 escritores × 3s cada, sequenciais).
+A cada execução, o gerador sorteia a quantidade de leitores, de escritores,
+o saldo inicial e o valor de cada escritor, e imprime a semente usada. Para
+repetir a mesma entrada depois, passe a semente como argumento:
+
+```bash
+./v1 42
+```
 
 ## Versão 2 — preferência de escritores (não ocorre leitura suja)
 
 Compilar:
 
 ```bash
-gcc -Wall -Wextra -o v2 leitores-escritores/versao-2-preferencia-escritores/main.c leitores-escritores/conta.c common/log.c -lpthread
+gcc -Wall -Wextra -o v2 leitores-escritores/versao-2-preferencia-escritores/main.c leitores-escritores/conta.c common/log.c common/gerador.c -lpthread
 ```
 
 Rodar:
@@ -38,7 +45,7 @@ Rodar:
 ./v2
 ```
 
-Tempo esperado de execução: ~12s (3 escritores × 1s + leitores lendo juntos por 3s no final).
+Mesma entrada aleatória da v1 (também aceita uma semente como argumento).
 
 ## Rodar várias vezes seguidas
 
